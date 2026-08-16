@@ -1,0 +1,19 @@
+{
+  "name": "fovea-core",
+  "version": "0.1.0",
+  "description": "Fixation-point text emphasis: tokenizes prose into words with leading-stem lengths, and renders them to ANSI, HTML, or Markdown.",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc -b",
+    "test": "node --test test/*.test.js"
+  },
+  "keywords": ["reading", "accessibility", "typography", "fixation", "text"],
+  "engines": { "node": ">=18" }
+}

@@ -1,0 +1,23 @@
+{
+  "name": "fovea",
+  "version": "0.1.0",
+  "description": "Fixation-point reading for any terminal AI agent. Wraps a command in a pty and emphasizes the leading stem of each word, or filters piped output.",
+  "license": "MIT",
+  "type": "module",
+  "bin": { "fovea": "./dist/index.js" },
+  "main": "./dist/index.js",
+  "files": ["dist", "scripts"],
+  "scripts": {
+    "build": "tsc -b && chmod +x dist/index.js",
+    "postinstall": "node scripts/fix-pty-permissions.mjs"
+  },
+  "dependencies": {
+    "fovea-core": "0.1.0",
+    "fovea-stream": "0.1.0"
+  },
+  "optionalDependencies": {
+    "node-pty": "^1.0.0"
+  },
+  "keywords": ["cli", "reading", "accessibility", "terminal", "ansi", "pty"],
+  "engines": { "node": ">=18" }
+}
