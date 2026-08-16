@@ -1,0 +1,7 @@
+The fovea centralis is the pit in your retina responsible for sharp central
+vision. It covers about one degree of your visual field, which is roughly the
+width of your thumbnail held at arm's length, and every fixation your eye makes
+while reading lands there.
+
+Paths like src/render/ansi.ts, flags like --max-stem, and identifiers like
+camelCase are left exactly as they were written.
