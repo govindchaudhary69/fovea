@@ -11,7 +11,7 @@ Output demo/fovea.gif
 Set Shell zsh
 Set FontSize 22
 Set Width 1180
-Set Height 700
+Set Height 560
 Set Padding 26
 Set TypingSpeed 45ms
 Set Theme "Catppuccin Mocha"

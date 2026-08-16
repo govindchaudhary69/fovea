@@ -10,6 +10,8 @@ fovea aider --model sonnet
 git log | fovea --style dim-tail
 ```
 
+![The same paragraph before and after fovea, then in dim-tail style](demo/fovea.gif)
+
 `fovea` runs a command inside a pseudo-terminal and emphasizes the leading stem
 of each word on its way to your screen. The wrapped program keeps a real tty, so
 full-screen agent interfaces behave exactly as they do unwrapped.
