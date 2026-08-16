@@ -1,6 +1,6 @@
 {
   "name": "fovea",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Fixation-point reading for any terminal AI agent. Wraps a command in a pty and emphasizes the leading stem of each word, or filters piped output.",
   "license": "MIT",
   "author": "Govind Chaudhary",
@@ -13,7 +13,7 @@
   "bugs": "https://github.com/govindchaudhary69/fovea/issues",
   "type": "module",
   "bin": {
-    "fovea": "./dist/index.js"
+    "fovea": "dist/index.js"
   },
   "main": "./dist/index.js",
   "files": [
