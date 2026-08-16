@@ -45,8 +45,19 @@ pseudo-terminal at all.
 npm install -g fovea
 ```
 
-Node 18 or newer. The pty wrapper pulls in `node-pty`; if it fails to build,
-piped mode still works.
+Node 18 or newer.
+
+Wrapping a command needs `node-pty`, which ships prebuilt binaries for macOS and
+Windows. **On Linux it compiles from source**, so install the build tools first:
+
+```
+sudo apt install -y build-essential python3     # Debian, Ubuntu
+sudo dnf install -y gcc-c++ make python3        # Fedora, RHEL
+```
+
+Without them the install still succeeds — `node-pty` is optional — but only
+piped mode will work, and `fovea <command>` will tell you what is missing.
+Piping needs nothing beyond Node on every platform.
 
 ## Options
 
