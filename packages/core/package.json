@@ -3,17 +3,36 @@
   "version": "0.1.0",
   "description": "Fixation-point text emphasis: tokenizes prose into words with leading-stem lengths, and renders them to ANSI, HTML, or Markdown.",
   "license": "MIT",
+  "author": "Govind Chaudhary",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/govindchaudhary69/fovea.git",
+    "directory": "packages/core"
+  },
+  "homepage": "https://github.com/govindchaudhary69/fovea#readme",
+  "bugs": "https://github.com/govindchaudhary69/fovea/issues",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": "./dist/index.js"
   },
-  "files": ["dist"],
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
     "build": "tsc -b",
     "test": "node --test test/*.test.js"
   },
-  "keywords": ["reading", "accessibility", "typography", "fixation", "text"],
-  "engines": { "node": ">=18" }
+  "keywords": [
+    "reading",
+    "accessibility",
+    "typography",
+    "fixation",
+    "text"
+  ],
+  "engines": {
+    "node": ">=18"
+  }
 }

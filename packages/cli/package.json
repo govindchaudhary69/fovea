@@ -3,12 +3,27 @@
   "version": "0.1.0",
   "description": "Fixation-point reading for any terminal AI agent. Wraps a command in a pty and emphasizes the leading stem of each word, or filters piped output.",
   "license": "MIT",
+  "author": "Govind Chaudhary",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/govindchaudhary69/fovea.git",
+    "directory": "packages/cli"
+  },
+  "homepage": "https://github.com/govindchaudhary69/fovea#readme",
+  "bugs": "https://github.com/govindchaudhary69/fovea/issues",
   "type": "module",
-  "bin": { "fovea": "./dist/index.js" },
+  "bin": {
+    "fovea": "./dist/index.js"
+  },
   "main": "./dist/index.js",
-  "files": ["dist", "scripts"],
+  "files": [
+    "dist",
+    "scripts",
+    "README.md"
+  ],
   "scripts": {
     "build": "tsc -b && chmod +x dist/index.js",
+    "prepack": "node ../../scripts/sync-readme.mjs",
     "postinstall": "node scripts/fix-pty-permissions.mjs"
   },
   "dependencies": {
@@ -18,6 +33,15 @@
   "optionalDependencies": {
     "node-pty": "^1.0.0"
   },
-  "keywords": ["cli", "reading", "accessibility", "terminal", "ansi", "pty"],
-  "engines": { "node": ">=18" }
+  "keywords": [
+    "cli",
+    "reading",
+    "accessibility",
+    "terminal",
+    "ansi",
+    "pty"
+  ],
+  "engines": {
+    "node": ">=18"
+  }
 }

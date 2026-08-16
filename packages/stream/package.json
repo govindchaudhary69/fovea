@@ -3,13 +3,24 @@
   "version": "0.1.0",
   "description": "Incremental fixation-point emphasis for streaming, ANSI-coloured output — tracks SGR state and holds back partial words across chunk boundaries.",
   "license": "MIT",
+  "author": "Govind Chaudhary",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/govindchaudhary69/fovea.git",
+    "directory": "packages/stream"
+  },
+  "homepage": "https://github.com/govindchaudhary69/fovea#readme",
+  "bugs": "https://github.com/govindchaudhary69/fovea/issues",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": "./dist/index.js"
   },
-  "files": ["dist"],
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
     "build": "tsc -b",
     "test": "node --test test/*.test.js"
@@ -17,6 +28,14 @@
   "dependencies": {
     "fovea-core": "0.1.0"
   },
-  "keywords": ["ansi", "stream", "reading", "accessibility", "terminal"],
-  "engines": { "node": ">=18" }
+  "keywords": [
+    "ansi",
+    "stream",
+    "reading",
+    "accessibility",
+    "terminal"
+  ],
+  "engines": {
+    "node": ">=18"
+  }
 }
