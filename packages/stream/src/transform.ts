@@ -1,6 +1,7 @@
 import { renderAnsi, tokenize, type Options } from "fovea-core";
 import type { AnsiStyle } from "fovea-core";
 import { SgrState } from "./sgr.js";
+import { RegionTracker, type CodeDetection, type Run } from "./region.js";
 
 const CSI = "\\x1b\\[[0-9;:?]*[ -/]*[@-~]";
 // OSC, DCS, SOS, PM and APC all carry a payload terminated by BEL or ST.
@@ -23,6 +24,15 @@ const MAX_HOLD = 64;
 
 export interface StreamOptions extends Partial<Options> {
   style?: AnsiStyle;
+  /**
+   * How hard to work at leaving code blocks alone.
+   *
+   *  - `fences` follows Markdown fences, which survive in piped output.
+   *  - `auto` adds a background-colour signal, for agents that have already
+   *    rendered their Markdown to ANSI and left no fences behind.
+   *  - `off` emphasizes everything that is not caught per-word.
+   */
+  codeDetection?: CodeDetection;
 }
 
 /**
@@ -40,9 +50,13 @@ export class BionicTransform {
   private held = "";
   private readonly sgr = new SgrState();
   private readonly options: StreamOptions;
+  private readonly detection: CodeDetection;
+  private readonly region: RegionTracker;
 
   constructor(options: StreamOptions = {}) {
     this.options = options;
+    this.detection = options.codeDetection ?? "auto";
+    this.region = new RegionTracker(this.detection !== "off");
   }
 
   feed(chunk: string): string {
@@ -61,14 +75,14 @@ export class BionicTransform {
     ESCAPE.lastIndex = 0;
 
     for (let match = ESCAPE.exec(data); match; match = ESCAPE.exec(data)) {
-      out += this.text(data.slice(position, match.index));
+      out += this.render(this.region.text(data.slice(position, match.index)));
       const sequence = match[0];
       const params = SGR_PARAMS.exec(sequence);
       if (params) this.sgr.apply(params[1]!);
-      out += sequence;
+      out += this.render(this.region.escape(sequence));
       position = match.index + sequence.length;
     }
-    out += this.text(data.slice(position));
+    out += this.render(this.region.text(data.slice(position)));
 
     return out;
   }
@@ -77,10 +91,28 @@ export class BionicTransform {
   flush(): string {
     const remaining = this.held;
     this.held = "";
-    return remaining ? this.text(remaining) : "";
+    const trailing = remaining ? this.region.text(remaining) : [];
+    return this.render(trailing) + this.render(this.region.flush());
   }
 
-  private text(slice: string): string {
+  private render(runs: Run[]): string {
+    let out = "";
+    for (const run of runs) {
+      const verbatim = run.escape || run.code || this.painted();
+      out += verbatim ? run.text : this.emphasize(run.text);
+    }
+    return out;
+  }
+
+  /**
+   * A painted background almost always means a rendered code block, a diff, or
+   * a selection — none of which should be skimmed.
+   */
+  private painted(): boolean {
+    return this.detection === "auto" && this.sgr.hasBackground();
+  }
+
+  private emphasize(slice: string): string {
     if (!slice) return "";
     return renderAnsi(tokenize(slice, this.options), {
       style: this.options.style ?? "bold",

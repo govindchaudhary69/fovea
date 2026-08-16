@@ -1,6 +1,6 @@
 {
   "name": "fovea-core",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Fixation-point text emphasis: tokenizes prose into words with leading-stem lengths, and renders them to ANSI, HTML, or Markdown.",
   "license": "MIT",
   "author": "Govind Chaudhary",
@@ -30,7 +30,10 @@
     "accessibility",
     "typography",
     "fixation",
-    "text"
+    "text",
+    "bionic-reading",
+    "speed-reading",
+    "fixation-point"
   ],
   "engines": {
     "node": ">=18"

@@ -1,6 +1,8 @@
 export { BionicTransform } from "./transform.js";
 export type { StreamOptions } from "./transform.js";
 export { SgrState } from "./sgr.js";
+export { RegionTracker } from "./region.js";
+export type { CodeDetection, Run } from "./region.js";
 
 import { Transform, type TransformCallback } from "node:stream";
 import { BionicTransform, type StreamOptions } from "./transform.js";

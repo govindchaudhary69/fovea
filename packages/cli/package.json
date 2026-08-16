@@ -1,6 +1,6 @@
 {
   "name": "fovea",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Fixation-point reading for any terminal AI agent. Wraps a command in a pty and emphasizes the leading stem of each word, or filters piped output.",
   "license": "MIT",
   "author": "Govind Chaudhary",
@@ -27,8 +27,8 @@
     "postinstall": "node scripts/fix-pty-permissions.mjs"
   },
   "dependencies": {
-    "fovea-core": "0.1.0",
-    "fovea-stream": "0.1.0"
+    "fovea-core": "0.2.0",
+    "fovea-stream": "0.2.0"
   },
   "optionalDependencies": {
     "node-pty": "^1.0.0"
@@ -39,7 +39,10 @@
     "accessibility",
     "terminal",
     "ansi",
-    "pty"
+    "pty",
+    "bionic-reading",
+    "speed-reading",
+    "fixation-point"
   ],
   "engines": {
     "node": ">=18"

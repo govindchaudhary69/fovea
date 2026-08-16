@@ -20,6 +20,8 @@ Options:
       --min-word <n>    leave words shorter than this (default: 2)
       --stopwords       skip common function words
       --locale <tag>    locale for word segmentation  (default: en)
+  -c, --code <mode>     leave code blocks alone: auto | fences | off
+                        (default: auto)
   -h, --help            show this message
   -v, --version         print the version
 
@@ -64,12 +66,18 @@ export function parse(argv: string[]): Invocation {
       case "--min-word": options.minWordLength = number(value(), argument); break;
       case "--stopwords": options.skipStopwords = true; break;
       case "--locale": options.locale = value(); break;
+      case "-c": case "--code": options.codeDetection = detection(value()); break;
       default: throw new Error(`unknown option ${argument}`);
     }
   }
 
   invocation.command = argv.slice(index);
   return invocation;
+}
+
+function detection(value: string): "auto" | "fences" | "off" {
+  if (value === "auto" || value === "fences" || value === "off") return value;
+  throw new Error(`--code expects auto, fences or off, got ${value}`);
 }
 
 function style(value: string): "bold" | "dim-tail" | "both" {

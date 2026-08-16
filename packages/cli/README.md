@@ -29,7 +29,8 @@ the only place to fix them once for every tool:
   line, so `fovea` tracks the active attributes and re-asserts them after every
   stem.
 - **It is full of code.** `src/index.ts`, `--max-stem` and `camelCase` are left
-  verbatim; emphasizing them is what makes naive implementations unreadable.
+  verbatim, and so are whole code blocks; emphasizing them is what makes naive
+  implementations unreadable. See [Code blocks](#code-blocks).
 
 Because emphasis is added with escape sequences, which occupy no columns,
 nothing the wrapped program printed changes width and its own layout
@@ -57,6 +58,7 @@ piped mode still works.
 | `--min-word` | `2` | leave shorter words alone |
 | `--stopwords` | off | skip common function words |
 | `--locale` | `en` | locale for word segmentation |
+| `-c, --code` | `auto` | leave code blocks alone: `auto`, `fences`, `off` |
 
 `dim-tail` fades the back of each word instead of bolding the front. It reads as
 less shouty on dense output, and on terminals whose bold is a brighter colour
@@ -64,6 +66,27 @@ rather than a heavier weight it is often the only one that works.
 
 Everything after the first non-option argument goes to the wrapped command, so
 its own flags need no escaping.
+
+## Code blocks
+
+Code is meant to be read carefully rather than skimmed, so `fovea` leaves whole
+blocks alone. How it finds them depends on what the source gives it.
+
+**`fences`** follows Markdown fences. They survive in piped output, so this is
+exact wherever the source emits raw Markdown.
+
+**`auto`** — the default — adds a second signal for the harder case. A terminal
+agent has usually already rendered its Markdown to ANSI before `fovea` sees
+anything, leaving no fences to find; there, a painted background is the most
+reliable remaining evidence that a run is code. This is a heuristic, so it is
+right most of the time rather than always.
+
+**`off`** falls back to the per-word rules alone.
+
+Classification needs only the first few characters of a line, so `fovea` holds
+back a bounded prefix rather than buffering whole lines — waiting for a newline
+would stall output mid-sentence, which is exactly what a reader of streaming
+output would notice.
 
 ## Library
 
@@ -116,7 +139,7 @@ Early. The pieces below work and are tested; the rest is planned.
 - [x] Core transform, ANSI / HTML / Markdown renderers
 - [x] Streaming transform with SGR tracking
 - [x] pty wrapper and pipe filter
-- [ ] Markdown-aware fenced-code skipping
+- [x] Code-block detection, by fence and by background colour
 - [ ] Config file and per-agent profiles
 - [ ] Browser extension
 - [ ] React component

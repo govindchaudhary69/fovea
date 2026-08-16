@@ -1,6 +1,6 @@
 {
   "name": "fovea-stream",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Incremental fixation-point emphasis for streaming, ANSI-coloured output — tracks SGR state and holds back partial words across chunk boundaries.",
   "license": "MIT",
   "author": "Govind Chaudhary",
@@ -26,14 +26,17 @@
     "test": "node --test test/*.test.js"
   },
   "dependencies": {
-    "fovea-core": "0.1.0"
+    "fovea-core": "0.2.0"
   },
   "keywords": [
     "ansi",
     "stream",
     "reading",
     "accessibility",
-    "terminal"
+    "terminal",
+    "bionic-reading",
+    "speed-reading",
+    "fixation-point"
   ],
   "engines": {
     "node": ">=18"

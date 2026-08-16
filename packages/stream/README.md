@@ -46,6 +46,14 @@ Everything [fovea-core](https://www.npmjs.com/package/fovea-core) accepts, plus:
 | Option | Default | Meaning |
 | --- | --- | --- |
 | `style` | `"bold"` | `bold`, `dim-tail`, or `both` |
+| `codeDetection` | `"auto"` | `auto`, `fences`, or `off` |
+
+`codeDetection` keeps whole code blocks unemphasized. `fences` follows Markdown
+fences, which survive in piped output. `auto` adds a painted background as a
+second signal, for agents that have already rendered their Markdown to ANSI and
+left no fences behind — a heuristic, so right most of the time rather than
+always. Classification reads only the first few characters of a line, so output
+is never buffered to the next newline.
 
 `dim-tail` fades the back of each word instead of bolding the front. On
 terminals whose bold is a brighter colour rather than a heavier weight, it is

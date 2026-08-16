@@ -75,6 +75,15 @@ export class SgrState {
     this.background = null;
   }
 
+  /**
+   * Whether a non-default background is painted. Terminal agents that have
+   * already rendered Markdown to ANSI leave no fence characters behind, and a
+   * background is the most reliable remaining signal that a run is code.
+   */
+  hasBackground(): boolean {
+    return this.background !== null;
+  }
+
   /** The sequence that re-establishes this state from normal intensity. */
   restore(): string {
     const codes: number[] = [];
